@@ -1,0 +1,249 @@
+DS1#sh run
+Building configuration...
+
+Current configuration : 4712 bytes
+!
+version 12.2(37)SE1
+no service timestamps log datetime msec
+no service timestamps debug datetime msec
+no service password-encryption
+!
+hostname DS1
+!
+!
+no profinet
+enable secret 5 $1$mERr$CunnQjkAEasAf02ni13tK/
+!
+!
+ip dhcp excluded-address 10.0.0.1
+ip dhcp excluded-address 10.0.0.2
+ip dhcp excluded-address 10.0.0.3
+ip dhcp excluded-address 10.0.0.129
+ip dhcp excluded-address 10.0.0.130
+ip dhcp excluded-address 10.0.0.131
+ip dhcp excluded-address 10.0.0.193
+ip dhcp excluded-address 10.0.0.194
+ip dhcp excluded-address 10.0.0.195
+ip dhcp excluded-address 10.0.0.225
+ip dhcp excluded-address 10.0.0.226
+ip dhcp excluded-address 10.0.0.227
+!
+ip dhcp pool VLAN-10
+ network 10.0.0.0 255.255.255.128
+ default-router 10.0.0.3
+ dns-server 8.8.8.8
+ip dhcp pool VLAN_20
+ network 10.0.0.128 255.255.255.192
+ default-router 10.0.0.131
+ dns-server 8.8.8.8
+ip dhcp pool VLAN_30
+ network 10.0.0.192 255.255.255.224
+ default-router 10.0.0.195
+ dns-server 8.8.8.8
+ip dhcp pool VLAN_40
+ network 10.0.0.224 255.255.255.240
+ default-router 10.0.0.227
+ dns-server 8.8.8.8
+ip dhcp pool VLAN_50
+ network 10.0.1.8 255.255.255.248
+ default-router 10.0.1.9
+ dns-server 8.8.8.8
+!
+!
+ip routing
+!
+!
+!
+!
+username admin secret 5 $1$mERr$CunnQjkAEasAf02ni13tK/
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+ip ssh version 2
+ip ssh time-out 60
+no ip domain-lookup
+ip domain-name lab.local
+!
+!
+spanning-tree mode rapid-pvst
+spanning-tree vlan 10,30 priority 24576
+spanning-tree vlan 20,40 priority 28672
+!
+!
+!
+!
+!
+!
+interface FastEthernet0/1
+ switchport trunk native vlan 99
+ switchport trunk allowed vlan 10,20,30,40,50,99
+ switchport trunk encapsulation dot1q
+ switchport mode trunk
+ switchport nonegotiate
+!
+interface FastEthernet0/2
+ switchport trunk native vlan 99
+ switchport trunk allowed vlan 10,20,30,40,50,99
+ switchport trunk encapsulation dot1q
+ switchport mode trunk
+ switchport nonegotiate
+!
+interface FastEthernet0/3
+ no switchport
+ ip address 10.0.1.1 255.255.255.252
+ duplex auto
+ speed auto
+!
+interface FastEthernet0/4
+ switchport trunk native vlan 99
+ switchport trunk allowed vlan 10,20,30,40,50,99
+ switchport trunk encapsulation dot1q
+ switchport mode trunk
+ switchport nonegotiate
+!
+interface FastEthernet0/5
+ switchport trunk native vlan 99
+ switchport trunk allowed vlan 10,20,30,40,50,99
+ switchport trunk encapsulation dot1q
+ switchport mode trunk
+ switchport nonegotiate
+!
+interface FastEthernet0/6
+ switchport trunk native vlan 99
+ switchport trunk allowed vlan 10,20,30,40,50,99
+ switchport trunk encapsulation dot1q
+ switchport mode trunk
+ switchport nonegotiate
+!
+interface FastEthernet0/7
+!
+interface FastEthernet0/8
+!
+interface FastEthernet0/9
+!
+interface FastEthernet0/10
+!
+interface FastEthernet0/11
+!
+interface FastEthernet0/12
+!
+interface FastEthernet0/13
+!
+interface FastEthernet0/14
+!
+interface FastEthernet0/15
+!
+interface FastEthernet0/16
+!
+interface FastEthernet0/17
+!
+interface FastEthernet0/18
+!
+interface FastEthernet0/19
+!
+interface FastEthernet0/20
+!
+interface FastEthernet0/21
+!
+interface FastEthernet0/22
+!
+interface FastEthernet0/23
+!
+interface FastEthernet0/24
+!
+interface GigabitEthernet0/1
+!
+interface GigabitEthernet0/2
+!
+interface Vlan1
+ no ip address
+ shutdown
+!
+interface Vlan10
+ mac-address 0007.ec39.2c01
+ ip address 10.0.0.1 255.255.255.128
+ standby 10 ip 10.0.0.3
+ standby 10 priority 110
+ standby 10 preempt
+ standby 0 preempt
+!
+interface Vlan20
+ mac-address 0007.ec39.2c02
+ ip address 10.0.0.129 255.255.255.192
+ standby 20 ip 10.0.0.131
+ standby 20 priority 90
+ standby 20 preempt
+!
+interface Vlan30
+ mac-address 0007.ec39.2c03
+ ip address 10.0.0.193 255.255.255.224
+ standby 30 ip 10.0.0.195
+ standby 30 priority 110
+ standby 30 preempt
+!
+interface Vlan40
+ mac-address 0007.ec39.2c04
+ ip address 10.0.0.225 255.255.255.240
+ standby 40 ip 10.0.0.227
+ standby 40 priority 90
+ standby 40 preempt
+!
+interface Vlan50
+ mac-address 0007.ec39.2c05
+ no ip address
+!
+router ospf 1
+ router-id 1.1.1.1
+ log-adjacency-changes
+ network 10.0.0.128 0.0.0.63 area 0
+ network 10.0.0.192 0.0.0.31 area 0
+ network 10.0.0.224 0.0.0.15 area 0
+ network 10.0.1.0 0.0.0.3 area 0
+!
+ip classless
+!
+ip flow-export version 9
+!
+!
+access-list 10 permit 10.0.0.0 0.0.0.127
+access-list 10 permit 10.0.0.224 0.0.0.15
+access-list 20 permit 10.0.0.128 0.0.0.63
+access-list 20 permit 10.0.0.224 0.0.0.15
+access-list 30 permit 10.0.0.192 0.0.0.31
+access-list 30 permit 10.0.0.224 0.0.0.15
+access-list 40 permit 10.0.0.224 0.0.0.15
+access-list 50 permit any
+!
+banner motd ^CUnauthorized access prohibited. ^C
+!
+!
+!
+!
+!
+line con 0
+ exec-timeout 5 0
+ logging synchronous
+ login local
+!
+line aux 0
+!
+line vty 0 4
+ exec-timeout 5 0
+ login local
+ transport input ssh
+line vty 5 15
+ exec-timeout 5 0
+ login local
+ transport input ssh
+!
+!
+!
+!
+end
