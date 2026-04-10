@@ -143,11 +143,4 @@ enterprise-network-lab/
 
 ---
 
-## Author
-
-2nd year networking student at TVZ (Zagreb University of Applied Sciences).
-Targeting SOC/networking roles. CCNA in progress.
-
----
-
 *Full technical documentation including per-stage configuration details, troubleshooting notes, and design decisions available in `/documentation/Enterprise_Network_Lab.docx`*
