@@ -143,4 +143,4 @@ enterprise-network-lab/
 
 ---
 
-*Full technical documentation including per-stage configuration details, troubleshooting notes, and design decisions available in `/documentation/Enterprise_Network_Lab.docx`*
+*Full technical documentation including per-stage configuration details, troubleshooting notes, and design decisions available in [documentation](/documentation/Enterprise_Network_Lab_final.pdf)*
